@@ -27,5 +27,30 @@ defmodule GestorProyectos do
     %{gestor | proyectos: proyectos ++ [nuevo_proyecto]}
   end
 
-  
+  @doc """
+  Actualiza un proyecto existente en la lista de proyectos.
+  si el proyecto con el ID especificado no existe, retorna el mismo gestor sin cambios
+  """
+  @spec actualizacion_proyecto(t(), integer(), map()) :: t()
+  def actualizacion_proyecto(%__MODULE__{proyectos: proyectos} = gestor, id, cambios) do
+    proyectos_actualizados =
+      Enum.map(proyectos, fn proyecto ->
+        if proyecto.id == id do
+          struct(proyecto, cambios)
+        else
+          proyecto
+        end
+      end)
+
+    %{gestor | proyectos: proyectos_actualizados}
+  end
+
+  @doc """
+  retorna un proyecto por su ID.
+  si no existe, devuelve nil
+  """
+  @spec get_proyecto(t(), integer()) :: proyecto.t() | nil
+  def get_proyecto(%__MODULE__{proyectos: proyectos}, id) do
+    Enum.find(proyectos, fn proyecto -> proyecto.id == id end)
+  end
 end
