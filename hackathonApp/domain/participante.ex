@@ -15,7 +15,11 @@ defmodule Participante do
         }
 
   @roles_validos [:developer, :diseñador, :mentor, :organizador]
+  
 
+  @doc """
+  Crea un nuevo participante con un rol valido
+  """
   @spec crear(integer(), String.t(), rol()) :: {:ok, t()} | {:error, String.t()}
   def crear(id, nombre, rol) when rol in @roles_validos do
     participante = %__MODULE__{id: id, nombre: nombre, rol: rol, id_equipo: nil}
@@ -24,6 +28,6 @@ defmodule Participante do
 
   def crear(_, _, rol),
     do: {:error, "Rol invalido: #{inspect(rol)}. Roles validos: #{@roles_validos}"}
-    
+
 
 end
