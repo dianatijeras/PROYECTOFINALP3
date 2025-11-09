@@ -24,7 +24,7 @@ defmodule GestionEquipos do
   Crea un nuevo equipo con un participante inicial.
   """
   def crear_equipo(nombre, categoria, participante) do
-    equipo = Equipo.crear(nombre, categoria, participante)
+    equipo = Equipo.crear_equipo(nombre, categoria, participante)
     Agent.update(__MODULE__, fn equipos -> [equipo | equipos] end)
     IO.puts("Equipo '#{nombre}' creado en la categoría '#{categoria}'.")
     equipo

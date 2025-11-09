@@ -5,7 +5,7 @@ defmodule GestorProyectos do
 
   alias Proyecto
 
-  desfstruct proyectos: []
+  defstruct proyectos: []
 
   @type t :: %__MODULE__{
           proyectos: [Proyecto.t()]
@@ -49,7 +49,7 @@ defmodule GestorProyectos do
   retorna un proyecto por su ID.
   si no existe, devuelve nil
   """
-  @spec get_proyecto(t(), integer()) :: proyecto.t() | nil
+  @spec get_proyecto(t(), integer()) :: Proyecto.t() | nil
   def get_proyecto(%__MODULE__{proyectos: proyectos}, id) do
     Enum.find(proyectos, fn proyecto -> proyecto.id == id end)
   end
